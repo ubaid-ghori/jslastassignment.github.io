@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login & Sign Up</title>
+  <script src="script.js"></script>
+  <style>
+      .hide {
+      display: none;
+    }
+
+    /* CSS for the form */
+    form {
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 25px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: darkslategrey;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    a {
+      color:darkslategrey;
+    }
+    
+  </style>
+</head>
+<body>
+  <div id="login-page">
+    <h2>Login</h2>
+    <form>
+      <label for="login-username">Username:</label>
+      <input type="text" id="login-username" required><br><br>
+      
+      <label for="login-password">Password:</label>
+      <input type="password" id="login-password" required><br><br>
+      
+      <button type="button" onclick="login()">Login</button>
+      <p id="login-error" class="hide">Invalid username or password</p>
+      
+      <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign up</a></p>
+    </form>
+  </div>
+
+  <div id="signup-page" class="hide">
+    <h2>Sign Up</h2>
+    <form>
+      <label for="signup-username">Username:</label>
+      <input type="text" id="signup-username" required><br><br>
+      
+      <label for="signup-password">Password:</label>
+      <input type="password" id="signup-password" required><br><br>
+      
+      <button type="button" onclick="signUp()">Sign Up</button>
+      
+      <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+    </form>
+  </div>
+  <script>
+let users = [];
+
+function showSignUp() {
+  document.getElementById("login-page").classList.add("hide");
+  document.getElementById("signup-page").classList.remove("hide");
+}
+
+function login() {
+  let username = document.getElementById("login-username").value;
+  let password = document.getElementById("login-password").value;
+
+  if ((username === "bilal" && password === "1234") || (username === "ali" && password === "321")) {
+    console.log("Login successful");
+  } else {
+    document.getElementById("login-error").classList.remove("hide");
+  }
+  let user = {
+    username: username,
+    password: password
+  };
+  users.push(user);
+  console.log("Username: " + username);
+  console.log("All users:", users);
+}
+function signUp() {
+  let username = document.getElementById("signup-username").value;
+  let password = document.getElementById("signup-password").value;
+  let userExists = users.some(user => user.username === username);
+
+  if (userExists) {
+    document.write("Error: Username already exists");
+    return; 
+  }
+
+  let user = {
+    username: username,
+    password: password
+  };
+
+  users.push(user);
+  console.log("Username: " + username);
+  console.log("All users:", users);
+}
+
+
+  </script>
+</body>
+</html>
